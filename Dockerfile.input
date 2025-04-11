@@ -1,0 +1,15 @@
+
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY input.py .
+
+# Make the script executable
+RUN chmod +x input.py
+
+# Create a volume mount point
+VOLUME /data
+
+# The container will expect two numbers as arguments
+ENTRYPOINT ["python", "input.py"]

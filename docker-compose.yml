@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  input:
+    build:
+      context: .
+      dockerfile: Dockerfile.input
+    volumes:
+      - shared-data:/data
+    # The arguments will be passed at runtime
+
+  calculator:
+    build:
+      context: .
+      dockerfile: Dockerfile.calculator
+    volumes:
+      - shared-data:/data
+    depends_on:
+      - input
+
+  storage:
+    build:
+      context: .
+      dockerfile: Dockerfile.storage
+    volumes:
+      - shared-data:/data
+    depends_on:
+      - calculator
+
+volumes:
+  shared-data:
+    # This creates a named volume that all three containers can access

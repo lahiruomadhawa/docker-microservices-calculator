@@ -1,0 +1,14 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY storage.py .
+
+# Make the script executable
+RUN chmod +x storage.py
+
+# Create a volume mount point
+VOLUME /data
+
+# Run the storage script
+CMD ["python", "storage.py"]
